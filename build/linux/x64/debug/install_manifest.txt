@@ -1,0 +1,11 @@
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/flutter_application_1
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/data/icudtl.dat
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/lib/libflutter_linux_gtk.so
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/data/flutter_assets/NOTICES.Z
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/data/flutter_assets/FontManifest.json
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/data/flutter_assets/version.json
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/data/flutter_assets/kernel_blob.bin
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.json
+/home/Dev-Djily/Documents/app/flutter_application_1/build/linux/x64/debug/bundle/data/flutter_assets/shaders/ink_sparkle.frag
