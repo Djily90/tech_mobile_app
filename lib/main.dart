@@ -1,10 +1,8 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:tech_mobile_app/api/fetch_data/fetch_init_session.dart';
-import 'package:tech_mobile_app/api/models/model_initsession.dart';
+import 'package:tech_mobile_app/api/models/model_session.dart';
 
 void main() => runApp(const MyApp());
 
@@ -17,12 +15,19 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late Future<InitSession> futureTicket;
-  final fetch = FetchInitSession();
+  final _initSession = InitSession();
+  String fullUrl = "";
+
+  final urlApi = "http://localhost/itsm-ng/apirest.php/";
+  final userToken = "TRI7fumBWp2hO215WKfGwQYeNyg66zFYVox7DD7H";
+  final appToken = "kCbXZKqbFAyAUDvm4iSBGFTyYCHR2RrJja2Ggfw3";
 
   @override
   void initState() {
     super.initState();
-    futureTicket = fetch.fetchInitSessionData();
+    futureTicket =
+        _initSession.fetchInitSessionData(urlApi, userToken, appToken);
+    fullUrl = _initSession.getUri("initSession");
   }
 
   @override
@@ -48,7 +53,7 @@ class _MyAppState extends State<MyApp> {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Text("${"Session token"}: ${sessionTtoken2}",
-                        style: const TextStyle(fontSize: 20))
+                        style: const TextStyle(fontSize: 20)),
                   ],
                 );
               } else if (snapshot.hasError) {
