@@ -158,13 +158,13 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "flutter_application_1",
+      "name": "tech_mobile_app",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-12-07T16:32:33.678266Z",
+  "generated": "2022-12-08T10:42:54.593577Z",
   "generator": "pub",
   "generatorVersion": "2.18.5"
 }
