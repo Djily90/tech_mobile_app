@@ -1,0 +1,9 @@
+# Files and directories created by pub
+.dart_tool/
+.packages
+build/
+
+
+# documentation generate locally you can remove this line.
+doc/api/
+
