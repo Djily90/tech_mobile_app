@@ -2,7 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:tech_mobile_app/api/models/model_session.dart';
+import 'package:tech_mobile_app/api/model.dart';
 import 'package:tech_mobile_app/api/api_magmt.dart';
 
 void main() => runApp(const MyApp());
