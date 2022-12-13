@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:tech_mobile_app/api/api_magmt.dart';
+import 'package:mobileapp/api/api_magmt.dart';
 
 /// Class for models
 class InitSession {
