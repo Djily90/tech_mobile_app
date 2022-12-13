@@ -2,8 +2,8 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:tech_mobile_app/api/model.dart';
-import 'package:tech_mobile_app/api/api_magmt.dart';
+import 'package:mobileapp/api/model.dart';
+import 'package:mobileapp/api/api_magmt.dart';
 
 void main() => runApp(const MyApp());
 
@@ -51,13 +51,13 @@ class _MyAppState extends State<MyApp> {
             future: futureTicket,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                final sessionTtoken2 = snapshot.data!.sessionToken;
+                final sessionToken2 = snapshot.data!.sessionToken;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    Text("${"Session token"}: ${sessionTtoken2}",
+                    Text("${"Session token"}: ${sessionToken2}",
                         style: const TextStyle(fontSize: 20)),
                   ],
                 );

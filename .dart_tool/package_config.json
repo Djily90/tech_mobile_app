@@ -158,13 +158,13 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "tech_mobile_app",
+      "name": "mobileapp",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-12-08T10:42:54.593577Z",
+  "generated": "2022-12-12T14:55:01.377709Z",
   "generator": "pub",
   "generatorVersion": "2.18.5"
 }
