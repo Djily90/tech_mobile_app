@@ -9,14 +9,12 @@ class InitSession {
   static const String killSession = "killSession";
   final apiMgmt = ApiMgmt();
 
-  InitSession();
-
-  InitSession.core({
+  InitSession({
     this.sessionToken,
   });
 
   factory InitSession.fromJson(Map<String, dynamic> json) {
-    return InitSession.core(
+    return InitSession(
       sessionToken: json['session_token'],
     );
   }

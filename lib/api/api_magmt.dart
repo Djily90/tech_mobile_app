@@ -81,19 +81,15 @@ class ApiMgmt {
     apiSessionToken = sessionToken;
   }
 
-  void setapiBaseUrl(String apiBaseUrl) {
+  void setApiBaseUrl(String apiBaseUrl) {
     this.apiBaseUrl = apiBaseUrl;
   }
 
-  void setapiAuthToken(String apiAuthToken) {
+  void setApiAuthToken(String apiAuthToken) {
     this.apiAuthToken = apiAuthToken;
   }
 
-  void setapiSessionToken(String apiSessionToken) {
-    this.apiSessionToken = apiSessionToken;
-  }
-
-  void setuserToken(String userToken) {
+  void setUserToken(String userToken) {
     this.userToken = userToken;
   }
 }
