@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/UI/authentification.dart';
+import 'package:mobileapp/UI/home_page.dart';
 import 'package:mobileapp/UI/tickets_page.dart';
 import 'package:mobileapp/UI/computers_page.dart';
 
@@ -19,20 +20,27 @@ class NavigationDrawer extends StatelessWidget {
             buildHeader(
               urlImage: "assets/login_logo_itsm.png",
               text: "Application techniciens ITSM-NG",
-              onClicked: () => Navigator.of(context).push(MaterialPageRoute(
-                // ignore: prefer_const_constructors
-                builder: (context) => Authentification(),
-              )),
             ),
             Container(
               padding: padding,
               child: Column(
                 children: [
+                  const Divider(
+                    color: Colors.white70,
+                  ),
                   const SizedBox(height: 14),
                   buildMenuItem(
-                    text: 'Tickets',
-                    icon: Icons.support_agent,
+                    text: 'Accueil',
+                    icon: Icons.add_to_home_screen,
                     onClicked: () => seletedItem(context, 0),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  buildMenuItem(
+                    text: 'Tickets',
+                    icon: Icons.error_outline,
+                    onClicked: () => seletedItem(context, 1),
                   ),
                   const SizedBox(
                     height: 16,
@@ -40,7 +48,7 @@ class NavigationDrawer extends StatelessWidget {
                   buildMenuItem(
                     text: 'Computers',
                     icon: Icons.computer,
-                    onClicked: () => seletedItem(context, 1),
+                    onClicked: () => seletedItem(context, 2),
                   ),
                   const SizedBox(
                     height: 24,
@@ -55,9 +63,9 @@ class NavigationDrawer extends StatelessWidget {
                     height: 16,
                   ),
                   buildMenuItem(
-                    text: 'Other options',
-                    icon: Icons.keyboard_option_key,
-                    onClicked: () => seletedItem(context, 2),
+                    text: 'Configuration',
+                    icon: Icons.settings,
+                    onClicked: () => seletedItem(context, 3),
                   ),
                 ],
               ),
@@ -93,13 +101,23 @@ class NavigationDrawer extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context).push(MaterialPageRoute(
-          // ignore: prefer_const_constructors
-          builder: (context) => TicketsPage(),
+          builder: (context) => const HomePage(),
         ));
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
+          // ignore: prefer_const_constructors
+          builder: (context) => TicketsPage(),
+        ));
+        break;
+      case 2:
+        Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const ComputersPage(),
+        ));
+        break;
+      case 3:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const Authentification(),
         ));
         break;
     }
@@ -108,10 +126,8 @@ class NavigationDrawer extends StatelessWidget {
   Widget buildHeader({
     required String urlImage,
     required String text,
-    required VoidCallback onClicked,
   }) {
     return InkWell(
-      onTap: onClicked,
       child: Container(
         padding: padding.add(const EdgeInsets.symmetric(vertical: 40)),
         child: Row(
