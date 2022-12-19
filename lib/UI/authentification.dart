@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/api/model.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Authentification extends StatefulWidget {
   const Authentification({super.key});
@@ -18,8 +18,131 @@ class _AuthentificationState extends State<Authentification> {
   late String _userToken;
   late bool _checkSSL = false;
   late String sessionTokenValue;
+  static const String initSession = "initSession";
+  static const String sessionTokenField = "session_token";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 174, 12, 42),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 123, 8, 29),
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+        title: const Text("Authentification API ITSM-NG"),
+      ),
+      body: Container(
+        margin: const EdgeInsets.only(bottom: 70, left: 24, top: 24, right: 24),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Image.asset('assets/login_logo_itsm.png', width: 150),
+              const SizedBox(
+                height: 45,
+              ),
+              Expanded(
+                child: _buildURL(),
+              ),
+              Expanded(
+                child: _buildApiToken(),
+              ),
+              Expanded(
+                child: _buildUserToken(),
+              ),
+              Expanded(
+                child: _buildCheckSSL(),
+              ),
+
+              // ElevatedButton
+              ElevatedButton(
+                //MaterialButton
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      const Color.fromARGB(255, 245, 183, 177), // background
+                ),
+                child: const Text(
+                  'Valider',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 143, 90, 10),
+                      fontWeight: FontWeight.bold),
+                ),
+                onPressed: () async {
+                  if (!_formKey.currentState!.validate()) {
+                    return;
+                  }
+
+                  _formKey.currentState!.save();
+                  Future<dynamic> apiResponse =
+                      _initSession.apiMgmt.authentification(initSession);
+
+                  final apiResponseValue =
+                      await apiResponse.then((val) => val[sessionTokenField]);
+
+                  if (apiResponseValue == null) {
+                    //alert error connexion
+                    Alert(
+                      context: context,
+                      type: AlertType.error,
+                      title: "Error connexion",
+                      buttons: [
+                        DialogButton(
+                          color: const Color.fromARGB(255, 245, 183, 177),
+                          onPressed: () => Navigator.pop(context),
+                          width: 120,
+                          child: const Text(
+                            'Valider',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 143, 90, 10),
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ],
+                    ).show();
+                  } else {
+                    futureSession =
+                        _initSession.fetchInitSessionData(apiResponse);
+                    if (_initSession.apiMgmt.apiSessionToken == null) {
+                      futureSession.then((InitSession data) {
+                        _initSession.apiMgmt
+                            .setApiSessionToken(data.sessionToken.toString());
+                      });
+                    }
+                    if (_initSession.apiMgmt.apiSessionToken != null) {
+                      /*
+                        Connected
+                        Redirect to the home page
+                        */
+                      Alert(
+                        context: context,
+                        type: AlertType.success,
+                        title: "ok",
+                        buttons: [
+                          DialogButton(
+                            color: const Color.fromARGB(255, 245, 183, 177),
+                            onPressed: () => Navigator.pop(context),
+                            width: 120,
+                            child: const Text(
+                              'Valider',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 143, 90, 10),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        ],
+                      ).show();
+                    }
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget _buildURL() {
     return TextFormField(
@@ -122,6 +245,7 @@ class _AuthentificationState extends State<Authentification> {
           onChanged: (bool? value) {
             setState(() {
               _checkSSL = value!;
+              _initSession.apiMgmt.setCheckSSL(_checkSSL);
             });
           },
         ),
@@ -130,96 +254,6 @@ class _AuthentificationState extends State<Authentification> {
           style: TextStyle(fontSize: 17.0, color: Colors.white),
         ),
       ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 123, 8, 29),
-        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-        title: const Text("Authentification API ITSM-NG"),
-      ),
-      body: Container(
-        margin: const EdgeInsets.only(bottom: 70, left: 24, top: 24, right: 24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Image.asset('assets/login_logo_itsm.png', width: 150),
-              const SizedBox(
-                height: 45,
-              ),
-              Expanded(
-                child: _buildURL(),
-              ),
-              Expanded(
-                child: _buildApiToken(),
-              ),
-              Expanded(
-                child: _buildUserToken(),
-              ),
-              Expanded(
-                child: _buildCheckSSL(),
-              ),
-
-              // ElevatedButton
-              ElevatedButton(
-                //MaterialButton
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      const Color.fromARGB(255, 245, 183, 177), // background
-                ),
-                child: const Text(
-                  'Valider',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 143, 90, 10),
-                      fontWeight: FontWeight.bold),
-                ),
-                onPressed: () {
-                  if (!_formKey.currentState!.validate()) {
-                    return;
-                  }
-
-                  _formKey.currentState!.save();
-                  futureSession = _initSession.fetchInitSessionData();
-
-                  getSessionValue();
-
-                  if (kDebugMode) {
-                    print(_url);
-                    print(_apiToken);
-                    print(_userToken);
-                    print(_checkSSL);
-                  }
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  getSessionValue() async {
-    FutureBuilder<InitSession>(
-      future: futureSession,
-      builder: (context, snapshot) {
-        _initSession.apiMgmt.setApiSessionToken("gfgg");
-        if (snapshot.hasData) {
-          final sessionToken2 = snapshot.data!.sessionToken;
-          _initSession.apiMgmt.setApiSessionToken("ffff");
-          return Text(sessionToken2.toString());
-        } else if (snapshot.hasError) {
-          _initSession.apiMgmt.setApiSessionToken("ddd");
-          return Text('${snapshot.error}');
-        }
-
-        // By default, show a loading spinner.
-        return const CircularProgressIndicator();
-      },
     );
   }
 }

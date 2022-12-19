@@ -5,7 +5,7 @@ import 'package:mobileapp/api/api_magmt.dart';
 /// Class for models
 class InitSession {
   String? sessionToken;
-  static const String initSession = "initSession";
+  
   static const String killSession = "killSession";
   final apiMgmt = ApiMgmt();
 
@@ -19,7 +19,7 @@ class InitSession {
     );
   }
 
-  Future<InitSession> fetchInitSessionData() async {
-    return InitSession.fromJson(await apiMgmt.authentification(initSession));
+  Future<InitSession> fetchInitSessionData(Future<dynamic> data) async {
+    return InitSession.fromJson(await data);
   }
 }

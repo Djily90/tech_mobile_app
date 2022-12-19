@@ -7,6 +7,7 @@ class ApiMgmt {
   String? apiAuthToken;
   String? apiSessionToken;
   String? userToken;
+  bool checkSSL = false;
   bool authStatus = false;
   final String headerType = "application/json;charset=UTF-8";
 
@@ -28,8 +29,8 @@ class ApiMgmt {
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception(
-          "${"Failed to get data from the endpoind "} $relativeUrl");
+      authStatus = false;
+      throw Exception("Failed to get data from the endpoind $relativeUrl");
     }
   }
 
@@ -44,11 +45,16 @@ class ApiMgmt {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
+      authStatus = true;
+
       return jsonDecode(response.body);
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception('Failed to init the session');
+      authStatus = false;
+      return {
+        "Session-token": null,
+      };
     }
   }
 
@@ -91,5 +97,8 @@ class ApiMgmt {
 
   void setUserToken(String userToken) {
     this.userToken = userToken;
+  }
+  void setCheckSSL(bool checkSSL) {
+    this.checkSSL = checkSSL;
   }
 }
